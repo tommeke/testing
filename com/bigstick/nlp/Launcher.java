@@ -14,7 +14,7 @@ public class Launcher {
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
-		panel.add( new JLabel("we're running!"));
+		panel.add( new JLabel("we're running live!"));
 		panel.setPreferredSize(new Dimension(200,100));
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		
