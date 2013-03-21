@@ -19,7 +19,7 @@ public class HMMGene {
 	public HMMGene() throws Exception {
 		parseFrequencies( "/home/tom/coursera/nlp/week1/gene.counts");
 		//generateRareTraining( "/home/tom/coursera/nlp/week1/gene.train", "/home/tom/coursera/nlp/week1/gene.train.rare");
-		simpleTagger( "/home/tom/coursera/nlp/week1/gene.dev", "/home/tom/coursera/nlp/week1/gene_dev.p1.out");
+		simpleTagger( "/home/tom/coursera/nlp/week1/gene.test", "/home/tom/coursera/nlp/week1/gene_test.p1.out");
 	}
 	
 	private void simpleTagger( String input, String output) throws Exception {
@@ -32,12 +32,15 @@ public class HMMGene {
 				continue;
 			}
 			String x = "_RARE_";
-			if (xTable.contains(line.trim()))
+			if (xTable.containsKey(line.trim()))
 				x = line.trim();
 			double max = 0;
 			String tag = null;
 			for ( String y : yTable.keySet()) {
-				double p = ((double) emissionCountTable.get(x).get(y))/((double) yTable.get(y));
+				double upper = 0;
+				if (emissionCountTable.get(x) != null && emissionCountTable.get(x).get(y) != null)
+					upper = emissionCountTable.get(x).get(y);
+				double p = upper/((double) yTable.get(y));
 				if (p>max) {
 					max = p;
 					tag = y;
